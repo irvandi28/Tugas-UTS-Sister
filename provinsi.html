@@ -1,0 +1,49 @@
+ <html>
+  <header> 
+		<title>sulawesi tenggara</title> 
+		<link rel="stylesheet" href="leaflet/leaflet.css"/>
+		<script src="leaflet/leaflet.js"></script> 
+		<script src="geojson/sultra.geojson"></script> 
+		<script src="geojson/konawe.geojson"></script> 
+   </header> 
+   <body> 
+		<div id="provinsi" style="width: 900px; height: 580px;"></div>
+		<script> 
+			// Membuat data peta 
+			var dataprovinsi = { 
+			center : [-3.965382, 122.047440], 
+			zoom : 7 
+			} 
+			// Membuat objek peta 
+			var map = new L.map('provinsi', dataprovinsi); 
+			map.on('click', function(e) { 
+			alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng) 
+			}); 
+			// Membuat layer 
+			var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+			// Menambahkan layer ke peta
+			map.addLayer(layer);
+   
+			var kabupatenStyle = { 
+			"color": "#ff7800", 
+			"weight": 5, 
+			"opacity": 0.65   
+			}; 
+   
+			L.geoJson(provinsi).addTo(map); 
+			L.geoJson(kabupaten, kabupatenStyle).addTo(map); 
+			
+			var markerOptions = {			
+			title: "Kabupaten konawe", 
+			clickable: true, 
+			draggable: true 
+			}
+			// Creating a marker 
+			var marker = L.marker([-3.901175, 122.094943], markerOptions); 
+			marker.on('click', function(e) { window.location = "kabupaten.html";}); 
+   
+			// Adding marker to the map 
+			marker.addTo(map); 
+   </script> 
+   </body> 
+   </html>

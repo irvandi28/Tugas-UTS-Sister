@@ -1,0 +1,29 @@
+<html>
+  <header> 
+		<title>Provinsi Sulawesi Tenggara</title> 
+		<link rel="stylesheet" href="leaflet/leaflet.css"/>
+		<script src="leaflet/leaflet.js"></script> 
+		<script src="geojson/sultra.geojson"></script> 
+   </header> 
+   <body> 
+		<div id="provinsi" style="width: 900px; height: 580px;"></div>
+		<script> 
+			// Membuat data peta 
+			var dataprovinsi = { 
+			center : [-3.965382, 122.047440], 
+			zoom : 7
+			} 
+			// Membuat objek peta 
+			var map = new L.map('provinsi', dataprovinsi); 
+			map.on('click', function(e) { 
+			alert("Lat, Lon : " + e.latlng.lat + ", " + e.latlng.lng) 
+			}); 
+			// Membuat layer 
+			var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+			// Menambahkan layer ke peta
+			map.addLayer(layer);
+			L.geoJson(provinsi).addTo(map);
+			
+   </script> 
+   </body> 
+   </html>
